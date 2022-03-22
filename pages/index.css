@@ -36,3 +36,7 @@
 @import url(../blocks/cards/__wrapper/cards__wrapper.css);
 @import url(../blocks/cards/__title/cards__title.css);
 @import url(../blocks/cards/__image/cards__image.css);
+
+/* Footer */
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
