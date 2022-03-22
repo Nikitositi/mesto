@@ -5,3 +5,10 @@
   background: url('../../../images/edit-btn.svg') no-repeat center;
   border: 1px solid #fff;
 }
+
+@media screen and (max-width: 725px) {
+  .button_type_edit{
+    width: 18px;
+    height: 18px;
+  }
+}
