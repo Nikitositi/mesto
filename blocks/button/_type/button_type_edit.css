@@ -1,0 +1,7 @@
+.button_type_edit {
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  background: url('../../../images/edit-btn.svg') no-repeat center;
+  border: 1px solid #fff;
+}
