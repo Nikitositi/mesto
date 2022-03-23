@@ -33,7 +33,7 @@
             <img src="./images/cards/karachaevsk.jpg" alt="Карачаевск" class="cards__image">
             <div class="cards__wrapper">
               <p class="cards__title">Карачаевск</p>
-              <button class="button button_type_like"></button>
+              <button class="button button_type_like button_active"></button>
             </div>
           </li>
           <li class="cards__item">
@@ -78,5 +78,20 @@
       <p class="footer__copyright">© 2022 Mesto Russia</p>
     </footer>
   </div> <!--/container-->
+
+  <!-- Popup -->
+  <div class="popup">
+    <div class="popup__container">
+      <h3 class="popup__title">Редактировать профиль</h3>
+      <form class="popup__form">
+        <input type="text" class="popup__input popup__input_name" name="profile-name" placeholder="Введите имя" value="Жак-Ив Кусто" min="2" max="30">
+        <input type="text" class="popup__input popup__input_activity" name="profile-activity" placeholder="Введите вид деятельности" value="Исследователь океана" min="2" max="30">
+        <input type="submit" class="popup__submit" name="submit" value="Сохранить">
+      </form>
+      <button class="button button_type_close"></button>
+    </div>
+  </div>
+
+  <script src="./script/script.js"></script>
 </body>
 </html>
