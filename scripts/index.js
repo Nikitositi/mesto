@@ -1,15 +1,15 @@
 // Buttons
-let editButton = document.querySelector('.button_type_edit');
-let closeButton = document.querySelector('.button_type_close');
-let submitButton = document.querySelector('.popup__submit');
+const editButton = document.querySelector('.button_type_edit');
+const closeButton = document.querySelector('.button_type_close');
+const submitButton = document.querySelector('.popup__submit');
 
 // Form
-let formElement = document.querySelector('.popup__form');
-let profileNameInput = document.querySelector('.popup__input_name');
-let profileActivityInput = document.querySelector('.popup__input_activity');
+const formElement = document.querySelector('.popup__form');
+const profileNameInput = document.querySelector('.popup__input_name');
+const profileActivityInput = document.querySelector('.popup__input_activity');
 
 // Popup
-let popup = document.querySelector('.popup');
+const popup = document.querySelector('.popup');
 
 // Functions
 function openPopup() {
@@ -24,8 +24,8 @@ function closePopup() {
 function formSubmitHandler (evt) {
   evt.preventDefault();
 
-  let profileName = document.querySelector('.profile__name');
-  let profileActivity = document.querySelector('.profile__activity');
+  const profileName = document.querySelector('.profile__name');
+  const profileActivity = document.querySelector('.profile__activity');
 
   // Редактирование профиля
   profileName.textContent = profileNameInput.value;
