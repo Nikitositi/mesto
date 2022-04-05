@@ -19,6 +19,7 @@
 @import url(../blocks/button/_type/button_type_like.css);
 @import url(../blocks/button/_active/button_active.css);
 @import url(../blocks/button/_type/button_type_close.css);
+@import url(../blocks/button/_type/button_type_delete.css);
 
 /* Profile */
 @import url(../blocks/profile/profile.css);
@@ -51,3 +52,9 @@
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__submit/popup__submit.css);
+@import url(../blocks/popup/_type/popup_type_add.css);
+@import url(../blocks/popup/_type/popup_type_image.css);
+@import url(../blocks/popup/__wrapper/popup__wrapper.css);
+@import url(../blocks/popup/__image/popup__image.css);
+@import url(../blocks/popup/__figure/popup__figure.css);
+@import url(../blocks/popup/__caption/popup__caption.css);
