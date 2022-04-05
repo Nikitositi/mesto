@@ -66,6 +66,13 @@ for (let i = 0; i < initialCards.length; i++) {
     cards.removeChild(cardItemElement)
   })
 
+  // Открытие картинки в полный размер (попап)
+  cardItemElement.querySelector('.cards__image').addEventListener('click', function(evt) {
+    popups[2].querySelector('.popup__image').src = evt.target.src;
+    popups[2].querySelector('.popup__caption').textContent = evt.target.alt;
+    togglePopup(2)
+  })
+
   cards.appendChild(cardItemElement)
 }
 
@@ -98,6 +105,13 @@ function addNewCard(evt) {
 
   // Добавление карточки в начало
   cards.prepend(cardItemElement);
+
+  // Открытие картинки в полный размер (попап)
+  cardItemElement.querySelector('.cards__image').addEventListener('click', function(evt) {
+    popups[2].querySelector('.popup__image').src = evt.target.src;
+    popups[2].querySelector('.popup__caption').textContent = evt.target.alt;
+    togglePopup(2)
+  })
 
   // Очистка полей ввода
   newCardLink.value = '';
