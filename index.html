@@ -29,54 +29,6 @@
 
       <section class="photos">
         <ul class="cards">
-          <li class="cards__item">
-            <img src="./images/cards/karachaevsk.jpg" alt="Карачаевск" class="cards__image">
-            <button class="button button_type_delete"></button>
-            <div class="cards__wrapper">
-              <h2 class="cards__title">Карачаевск</h2>
-              <button class="button button_type_like button_active"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <img src="./images/cards/elbrus.jpg" alt="Эльбрус" class="cards__image">
-            <button class="button button_type_delete"></button>
-            <div class="cards__wrapper">
-              <h2 class="cards__title">Эльбрус</h2>
-              <button class="button button_type_like"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <img src="./images/cards/dombai.jpg" alt="Домбай" class="cards__image">
-            <button class="button button_type_delete"></button>
-            <div class="cards__wrapper">
-              <h2 class="cards__title">Домбай</h2>
-              <button class="button button_type_like"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <img src="./images/cards/dombai.jpg" alt="Домбай" class="cards__image">
-            <button class="button button_type_delete"></button>
-            <div class="cards__wrapper">
-              <h2 class="cards__title">Домбай</h2>
-              <button class="button button_type_like"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <img src="./images/cards/elbrus.jpg" alt="Эльбрус" class="cards__image">
-            <button class="button button_type_delete"></button>
-            <div class="cards__wrapper">
-              <h2 class="cards__title">Эльбрус</h2>
-              <button class="button button_type_like"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <img src="./images/cards/karachaevsk.jpg" alt="Карачаевск" class="cards__image">
-            <button class="button button_type_delete"></button>
-            <div class="cards__wrapper">
-              <h2 class="cards__title">Карачаевск</h2>
-              <button class="button button_type_like"></button>
-            </div>
-          </li>
         </ul>
       </section>
     </main>
@@ -89,7 +41,7 @@
   <div class="popup popup_type_edit">
     <div class="popup__container">
       <h3 class="popup__title">Редактировать профиль</h3>
-      <form class="popup__form">
+      <form class="popup__form" name="popup-profile">
         <input type="text" class="popup__input popup__input_name" name="profile-name" placeholder="Введите имя" value="Жак-Ив Кусто">
         <input type="text" class="popup__input popup__input_activity" name="profile-activity" placeholder="Введите вид деятельности" value="Исследователь океана">
         <input type="submit" class="popup__submit" name="submit" value="Сохранить">
@@ -101,9 +53,9 @@
   <div class="popup popup_type_add">
     <div class="popup__container">
       <h3 class="popup__title">Новое место</h3>
-      <form class="popup__form">
-        <input type="text" class="popup__input popup__input_title" name="card-title" placeholder="Название">
-        <input type="text" class="popup__input popup__input_link" name="card-link" placeholder="Ссылка на картинку">
+      <form class="popup__form" name="popup-card">
+        <input type="text" class="popup__input popup__input_title" name="card-title" placeholder="Название" value="">
+        <input type="text" class="popup__input popup__input_link" name="card-link" placeholder="Ссылка на картинку" value="">
         <input type="submit" class="popup__submit" name="submit" value="Создать">
       </form>
       <button class="button button_type_close"></button>
