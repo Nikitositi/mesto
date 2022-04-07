@@ -20,4 +20,8 @@
 * Возможность поставить "лайк"
 * Возможность открыть картинку в полном размере
 
+<<<<<<< HEAD
 [Ссылка проекта на Gh-Pages](https://nikitositi.github.io/mesto/)
+=======
+[Ссылка проекта на Gh-Pages](https://nikitositi.github.io/mesto/)
+>>>>>>> develop
