@@ -1,6 +1,5 @@
 // Buttons
 const buttonEdit = document.querySelector('.button_type_edit');
-const buttonSubmit = document.querySelector('.popup__submit');
 const buttonAdd = document.querySelector('.button_type_add');
 const buttonsClose = document.querySelectorAll('.button_type_close');
 
@@ -18,7 +17,7 @@ const profileActivity = document.querySelector('.profile__activity');
 
 // Popup
 const popups = document.querySelectorAll('.popup');
-const profilePopup = document.querySelector('.popup_type_edit');
+const popupTypeProfile = document.querySelector('.popup_type_edit');
 const popupTypeCard = document.querySelector('.popup_type_add');
 const popupTypeImage = document.querySelector('.popup_type_image');
 const popupImage = popupTypeImage.querySelector('.popup__image');
@@ -62,13 +61,23 @@ initialCards.forEach(element => {
   renderCard(element.name, element.link);
 })
 
-// Functions
+// Функции
 function openPopup(modalWindow) {
-  modalWindow.classList.add('popup_opened')
+  modalWindow.classList.add('popup_opened');
+  modalWindow.addEventListener('click', onOverlayClick);
+  window.addEventListener('keydown', onEscapeClick)
 }
 
+window.addEventListener('keydown', function(evt) {
+  if (evt.key === 'Escape') {
+    closePopup(document.querySelector('.popup_opened'))
+  }
+});
+
 function closePopup(modalWindow) {
-  modalWindow.classList.remove('popup_opened')
+  modalWindow.classList.remove('popup_opened');
+  modalWindow.removeEventListener('click', onOverlayClick);
+  window.removeEventListener('keydown', onEscapeClick)
 }
  
 function createCard(name, link) {
@@ -104,6 +113,18 @@ function renderCard(name, link) {
   cardsContainer.prepend(createCard(name, link))
 }
 
+function onOverlayClick(evt) {
+  if (evt.target === evt.currentTarget) {
+    closePopup(evt.target)
+  }
+}
+
+function onEscapeClick(evt) {
+  if (evt.key === 'Escape') {
+    closePopup(document.querySelector('.popup_opened'))
+  }
+}
+
 // Form submit
 function formProfileSubmitHandler (evt) {
   evt.preventDefault();
@@ -113,7 +134,7 @@ function formProfileSubmitHandler (evt) {
   profileActivity.textContent = profileActivityInput.value;
 
   // Автоматическое закрытие попапа
-  closePopup(profilePopup);
+  closePopup(popupTypeProfile);
 }
 
 function formCardSubmitHandler (evt) {
@@ -127,7 +148,7 @@ function formCardSubmitHandler (evt) {
 buttonEdit.addEventListener('click', function() {
   profileNameInput.value = profileName.textContent;
   profileActivityInput.value = profileActivity.textContent;
-  openPopup(profilePopup)
+  openPopup(popupTypeProfile)
 });
 buttonAdd.addEventListener('click', function() {
   cardNameInput.value = '';
