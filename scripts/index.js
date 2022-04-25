@@ -16,7 +16,6 @@ const profileName = document.querySelector('.profile__name');
 const profileActivity = document.querySelector('.profile__activity');
 
 // Popup
-const popups = document.querySelectorAll('.popup');
 const popupTypeProfile = document.querySelector('.popup_type_edit');
 const popupTypeCard = document.querySelector('.popup_type_add');
 const popupTypeImage = document.querySelector('.popup_type_image');
@@ -29,34 +28,7 @@ const cardsContainer = document.querySelector('.cards');
 // Templates 
 const cardItemTemplate = document.querySelector('#card-template').content;
 
-// Добавление начальных шести карточек
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
+// Создание начальных карточек
 initialCards.forEach(element => {
   renderCard(element.name, element.link);
 })
@@ -65,19 +37,13 @@ initialCards.forEach(element => {
 function openPopup(modalWindow) {
   modalWindow.classList.add('popup_opened');
   modalWindow.addEventListener('click', onOverlayClick);
-  window.addEventListener('keydown', onEscapeClick)
+  document.addEventListener('keydown', onEscapeClick)
 }
-
-window.addEventListener('keydown', function(evt) {
-  if (evt.key === 'Escape') {
-    closePopup(document.querySelector('.popup_opened'))
-  }
-});
 
 function closePopup(modalWindow) {
   modalWindow.classList.remove('popup_opened');
   modalWindow.removeEventListener('click', onOverlayClick);
-  window.removeEventListener('keydown', onEscapeClick)
+  document.removeEventListener('keydown', onEscapeClick)
 }
  
 function createCard(name, link) {
@@ -153,6 +119,12 @@ buttonEdit.addEventListener('click', function() {
 buttonAdd.addEventListener('click', function() {
   cardNameInput.value = '';
   cardLinkInput.value = '';
+
+  // Отключение кнопки создания карточки, чтобы предотварить ввод некорректных данных
+  const buttonSubmitCard = popupTypeCard.querySelector('.popup__button');
+  buttonSubmitCard.disabled = true;
+  buttonSubmitCard.classList.add('popup__button_disabled');
+
   openPopup(popupTypeCard)
 });
 formProfilePopup.addEventListener('submit', formProfileSubmitHandler);
