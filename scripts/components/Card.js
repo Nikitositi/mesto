@@ -1,4 +1,4 @@
-import { imagePopupHandler } from "../index.js";
+import { imagePopupHandler } from "./Utils.js";
 
 export default class Card {
 
@@ -26,7 +26,7 @@ export default class Card {
 
   // Метод - удаление карточки
   _deleteClickHandler = () => {
-    this._elementDeleteButton.closest('.cards__item').remove();
+    this._element.remove();
   }
 
   // Метод - добавление слушателей
