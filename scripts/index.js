@@ -65,14 +65,14 @@ function closePopup(modalWindow) {
   document.removeEventListener('keydown', onEscapeClick)
 }
 
-// Фукнция открытия картинки в полном размере
-export function imagePopupHandler(name, link) {
-  popupImage.src = link;
-  popupImage.alt = name;
-  popupCaption.textContent = name;
+// // Фукнция открытия картинки в полном размере
+// export function imagePopupHandler(name, link) {
+//   popupImage.src = link;
+//   popupImage.alt = name;
+//   popupCaption.textContent = name;
 
-  openPopup(popupTypeImage);
-}
+//   openPopup(popupTypeImage);
+// }
 
 // Функция создания карточки из класса
 function createCard(data)  {
@@ -136,7 +136,7 @@ buttonAdd.addEventListener('click', function() {
   // Отключение кнопки создания карточки, чтобы предотварить ввод некорректных данных
   const buttonSubmitCard = popupTypeCard.querySelector('.popup__button');
   buttonSubmitCard.disabled = true;
-  buttonSubmitCard.classList.add('popup__button_disabled');
+  buttonSubmitCard.classList.add(configValidation.inactiveButtonClass);
 
   openPopup(popupTypeCard)
 });
