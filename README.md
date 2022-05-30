@@ -25,4 +25,13 @@
 * Добавлен класс FormValidator
 * Javascript разбит на модули
 
+**30.05.2022**
+Рефакторинг:
+* Добавлен класс Popup
+* Добавлен класс PopupWithForm
+* Добавлен класс PopupWithImage
+* Добавлен класс Section
+* Добавлен класс UserInfo
+**Сборка проекта с помощью Webpack**
+
 [Ссылка проекта на Gh-Pages](https://nikitositi.github.io/mesto/)
