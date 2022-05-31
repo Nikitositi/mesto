@@ -6,26 +6,15 @@ import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
-
-// Buttons
-const buttonEdit = document.querySelector('.button_type_edit');
-const buttonAdd = document.querySelector('.button_type_add');
-
-// Form
-const formProfilePopup = document.querySelector('[name="popup-profile"]');
-const formCardPopup = document.querySelector('[name="popup-card"]');
-const profileNameInput = document.querySelector('.popup__input_name');
-const profileActivityInput = document.querySelector('.popup__input_activity');
-
-// Конфигурация для формы
-const configValidation = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active'
-};
+import {
+  buttonEdit,
+  buttonAdd,
+  formProfilePopup,
+  formCardPopup,
+  profileNameInput,
+  profileActivityInput,
+  configValidation
+} from '../utils/constants.js';
 
 // Создаем валидацию для формы редактирования профиля
 const popupTypeProfileValidation = new FormValidator(configValidation, formProfilePopup);
