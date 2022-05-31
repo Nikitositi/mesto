@@ -23,7 +23,7 @@ export default class Card {
     this._elementTitle = this._element.querySelector('.cards__title');
     this._elementImage = this._element.querySelector('.cards__image');
     this._elementDeleteButton = this._element.querySelector('.button_type_delete');
-    this._elementLikeButton = this._element.querySelector('.button_type_like')
+    this._elementLikeButton = this._element.querySelector('.button_type_like');
 
     // Наполнение карточки
     this._elementImage.src = this._link;
