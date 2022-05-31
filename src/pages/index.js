@@ -34,7 +34,6 @@ popupTypeImage.setEventListeners();
 // Инициализация попапа-профиля
 const popupTypeProfile = new PopupWithForm(
   (inputsValues) => {
-    console.log(inputsValues)
     userInfo.setUserInfo(inputsValues);
   },
   '.popup_type_edit'
