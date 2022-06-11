@@ -40,12 +40,8 @@
 * Добавлен класс UserInfo
 **Сборка проекта с помощью Webpack**
 
-<<<<<<< HEAD
-[Ссылка проекта на Gh-Pages](https://nikitositi.github.io/mesto/)
-=======
 **12.06.2022**
 Рефакторинг:
 * Проект подключен к серверу, добавлено взаимодействие с Api
 
 [Ссылка проекта на Gh-Pages](https://nikitositi.github.io/mesto/)
->>>>>>> develop
