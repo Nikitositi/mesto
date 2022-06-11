@@ -72,7 +72,6 @@ export default class Api {
       });
   }
   deleteCard(id) {
-    this._rendering(button, true);
     return fetch(this._url + '/cards/' + id, {
       method: "DELETE",
       headers: this._headers,
@@ -83,9 +82,6 @@ export default class Api {
       .catch((err) => {
         console.log(err)
       })
-      .finally(() => {
-        this._rendering(button, false);
-      });
   }
 
   handleCard(id, action) {
