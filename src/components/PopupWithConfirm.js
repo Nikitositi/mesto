@@ -8,13 +8,14 @@ export default class PopupWithConfirm extends Popup {
   }
 
   confirmHandler(callback) {
-    this._submitButton.addEventListener('click', callback);
+    this.confirmHandler = callback;
   }
 
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener('submit', (evt) => {
         evt.preventDefault();
+        this.confirmHandler();
     });
   }
 }
