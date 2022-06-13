@@ -98,17 +98,19 @@ buttonEdit.addEventListener('click', () => {
 
 // Инициализация попапа-карточки
 const popupTypeCard = new PopupWithForm(
-  (item, button) => {
-    item.likes = [];
-    rendering(button, true);
-    api.addNewCard(item, button)
-      .then(() => {
-        const card = createCard(item);
-        cardsContainer.addItem(card);
-        popupTypeCard.close();
-      })
-      .catch(err => console.log(err))
-      .finally(() => rendering(button, false))
+  {
+    handleFormSubmit: (item, button) => {
+      item.likes = [];
+      rendering(button, true);
+      api.addNewCard(item, button)
+        .then((data) => {
+          const card = createCard(data);
+          cardsContainer.addItem(card);
+          popupTypeCard.close();
+        })
+        .catch(err => console.log(err))
+        .finally(() => rendering(button, false))
+    }
   },
   '.popup_type_add'
 );
@@ -145,7 +147,7 @@ popupTypeConfirm.setEventListeners();
 // Функции
 
 // Функция создания карточки из класса
-const createCard = (data) => {
+function createCard(data) {
   const card = new Card(
     {
       data: data,
