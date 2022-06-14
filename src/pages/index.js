@@ -83,8 +83,12 @@ popupTypeImage.setEventListeners();
 const popupTypeProfile = new PopupWithForm(
   {
     handleFormSubmit: (inputsValues, button) => {
-      userInfo.setUserInfo(inputsValues);
-      api.patchProfile(inputsValues, button);
+      console.log(button)
+      rendering(button, true)
+      api.patchProfile(inputsValues, button)
+        .then(() => userInfo.setUserInfo(inputsValues))
+        .catch((err) => console.log(err))
+        .finally(() => rendering(button, false))
     },
   },
   '.popup_type_edit'
@@ -128,11 +132,14 @@ const avatar = document.querySelector('.profile__avatar');
 const popupTypeAvatar = new PopupWithForm(
   {
     handleFormSubmit: (item, button) => {
+      rendering(button, true);
       avatar.src = item.avatarlink;
       api.updateAvatar(item, button)
         .then(() => {
           popupTypeAvatar.close()
-        });
+        })
+        .catch((err) => console.log(err))
+        .finally(() => rendering(button, false))
     },
   },
   '.popup_type_avatar'
