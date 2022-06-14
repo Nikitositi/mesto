@@ -20,7 +20,7 @@ import {
   configValidation,
 } from '../utils/constants.js';
 
-let userId = null; //Переменная для хранения ID текущего пользователя
+let userId; //Переменная для хранения ID текущего пользователя
 
 // Создаем валидацию для формы редактирования профиля
 const popupTypeProfileValidation = new FormValidator(configValidation, formProfilePopup);
@@ -68,7 +68,7 @@ const userInfo = new UserInfo(userSelectors);
 const cardsContainer = new Section(
   {
     renderer: (item) => {
-      const card = createCard(item);
+      const card = createCard(item, userId);
       cardsContainer.addItem(card);
     }
   },
@@ -81,9 +81,11 @@ popupTypeImage.setEventListeners();
 
 // Инициализация попапа-профиля
 const popupTypeProfile = new PopupWithForm(
-  (inputsValues, button) => {
-    userInfo.setUserInfo(inputsValues);
-    api.patchProfile(inputsValues, button);
+  {
+    handleFormSubmit: (inputsValues, button) => {
+      userInfo.setUserInfo(inputsValues);
+      api.patchProfile(inputsValues, button);
+    },
   },
   '.popup_type_edit'
 );
@@ -104,7 +106,7 @@ const popupTypeCard = new PopupWithForm(
       rendering(button, true);
       api.addNewCard(item, button)
         .then((data) => {
-          const card = createCard(data);
+          const card = createCard(data, userId);
           cardsContainer.addItem(card);
           popupTypeCard.close();
         })
@@ -124,12 +126,14 @@ buttonAdd.addEventListener('click', () => {
 // Инициализация попапа-аватара
 const avatar = document.querySelector('.profile__avatar');
 const popupTypeAvatar = new PopupWithForm(
-  (item, button) => {
-    avatar.src = item.avatarlink;
-    api.updateAvatar(item, button)
-      .then(() => {
-        popupTypeAvatar.close()
-      });
+  {
+    handleFormSubmit: (item, button) => {
+      avatar.src = item.avatarlink;
+      api.updateAvatar(item, button)
+        .then(() => {
+          popupTypeAvatar.close()
+        });
+    },
   },
   '.popup_type_avatar'
 );
@@ -141,41 +145,38 @@ updateAvatar.addEventListener('click', () => {
 });
 
 // Инициализация попапа-подтверждения
-const popupTypeConfirm = new PopupWithConfirm('.popup_type_confirm');
+const popupTypeConfirm = new PopupWithConfirm(
+  {
+    submit: (card) => {
+      api.deleteCard(card._id)
+        .then(() => {
+          card.deleteCard()
+        })
+        .catch(err => console.log(err))
+    }
+  },
+  '.popup_type_confirm'
+);
 popupTypeConfirm.setEventListeners();
 
 // Функции
 
 // Функция создания карточки из класса
-function createCard(data) {
+function createCard(data, userId) {
   const card = new Card(
     {
       data: data,
       handleCardClick: () => {
         popupTypeImage.open(data.name, data.link)
       },
-      handleCardDelete: () => handleCardDelete(card)
+      handleCardDelete: () => popupTypeConfirm.open(card)
     },
     handleLike,
     userId,
     '#card-template'
   );
-  
+  // console.log(`При создании:  ${card._id}`)
   return card.craftCard()
-};
-
-// Функция-колбэк удаления карточки
-function handleCardDelete(card) {
-  popupTypeConfirm.confirmHandler(() => {
-    console.log(card._id)
-    api.deleteCard(card._id)
-      .then(() => {
-        card.deleteCard();
-        popupTypeConfirm.close();
-      })
-      .catch(err => console.log(err))
-  });
-  popupTypeConfirm.open();
 };
 
 // Функция для лайка

@@ -16,17 +16,6 @@ export default class Card {
     if (this._ownerId === this._userId) {
       this._elementDeleteButton.classList.add('button_owner');
     }
-
-    // if (this.owner) {
-    //   if (this.owner._id === this._ownerId) {
-    //     this._elementDeleteButton.classList.add('button_owner');
-    //   }
-    //   this._data.likes.forEach((item) => {
-    //     if (item._id === this._ownerId) {
-    //       this._elementLikeButton.classList.add('button_active');
-    //     }
-    //   });
-    // }
   }
 
   // Метод получения шаблона карточки
@@ -41,6 +30,7 @@ export default class Card {
 
   deleteCard() {
     this._element.remove();
+    this._element = null;
   }
 
   // Метод - создание карточки
@@ -86,9 +76,7 @@ export default class Card {
     this._elementLikeButton.addEventListener('click', () => {
       this._likeClickHandler()
     });
-    this._elementDeleteButton.addEventListener('click', () => {
-      this._handleCardDelete();
-    });
+    this._elementDeleteButton.addEventListener('click', this._handleCardDelete);
     this._elementImage.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link)
     });
