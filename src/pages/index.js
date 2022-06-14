@@ -85,8 +85,11 @@ const popupTypeProfile = new PopupWithForm(
     handleFormSubmit: (inputsValues, button) => {
       console.log(button)
       rendering(button, true)
-      api.patchProfile(inputsValues, button)
-        .then(() => userInfo.setUserInfo(inputsValues))
+      api.patchProfile(inputsValues)
+        .then(() => {
+          userInfo.setUserInfo(inputsValues);
+          popupTypeProfile.close();
+        })
         .catch((err) => console.log(err))
         .finally(() => rendering(button, false))
     },
@@ -190,7 +193,9 @@ function createCard(data, userId) {
 function handleLike(id, action) {
   if (action === true) {
     api.handleCard(id, true)
+      .catch(err => console.log(err))
   } else {
     api.handleCard(id, false)
+      .catch(err => console.log(err))
   }
 }

@@ -4,16 +4,6 @@ export default class Api {
     this._headers = options.headers;
   }
 
-  // Метод - сообщение во время загрузки
-  _rendering(button, isLoading) {
-    // isLoading ? button.textContent = 'Сохранение...' : button.textContent = 'Сохранить';
-    if (isLoading === true) {
-      button.textContent = 'Сохранение...';
-    } else {
-      button.textContent = 'Сохранить';
-    }
-  }
-
   // Проверка ответа от сервера
   _checkResponseStatus(res) {
     if(res.ok) {
@@ -30,8 +20,7 @@ export default class Api {
       .then(this._checkResponseStatus)
   }
 
-  patchProfile(data, button) {
-    this._rendering(button, true);
+  patchProfile(data) {
     return fetch(this._url + '/users/me', {
       method: "PATCH",
       headers: this._headers,
@@ -43,8 +32,7 @@ export default class Api {
       .then(this._checkResponseStatus)
   }
 
-  addNewCard(data, button) {
-    this._rendering(button, true);
+  addNewCard(data) {
     return fetch(this._url + '/cards', {
       method: "POST",
       headers: this._headers,
@@ -78,8 +66,7 @@ export default class Api {
       .then(this._checkResponseStatus)
   }
 
-  updateAvatar(data, button) {
-    this._rendering(button, true);
+  updateAvatar(data) {
     return fetch(this._url + '/users/me/avatar', {
       method: "PATCH",
       headers: this._headers,
