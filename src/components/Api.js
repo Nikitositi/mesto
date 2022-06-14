@@ -70,6 +70,7 @@ export default class Api {
     } else {
       this._method = "DELETE";
     }
+    console.log('/cards/likes/' + id)
     return fetch(this._url + '/cards/likes/' + id, {
       method: this._method,
       headers: this._headers,

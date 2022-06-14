@@ -2,6 +2,7 @@ export default class Card {
   constructor({ data, handleCardClick, handleCardDelete }, handleLike, userId, cardSelector) {
     this._name = data.name;
     this._link = data.link;
+    this._data = data;
     this._likesLength = data.likes.length;
     this._id = data._id;
     this._ownerId = data.owner._id;
@@ -16,6 +17,11 @@ export default class Card {
     if (this._ownerId === this._userId) {
       this._elementDeleteButton.classList.add('button_owner');
     }
+    this._data.likes.forEach((like) => {
+      if(like._id === this._userId) {
+        this._elementLikeButton.classList.add('button_active')
+      }
+    })
   }
 
   // Метод получения шаблона карточки
@@ -59,15 +65,14 @@ export default class Card {
   // Метод - возможность ставить лайк
   _likeClickHandler() {
     this._elementLikeButton.classList.toggle('button_active');
-
     // Проверяем, лайкнули ли мы уже карточку
     if (this._elementLikeButton.classList.contains('button_active')) {
       // Преобразуем строку в число добавляем/отнимаем единицу
       this._elementLikesCounter.textContent = parseInt(this._elementLikesCounter.textContent, 10) + 1;
-      this._handleLike(this._ownerId, true);
+      this._handleLike(this._data._id, true);
     } else {
       this._elementLikesCounter.textContent = parseInt(this._elementLikesCounter.textContent, 10) - 1;
-      this._handleLike(this._ownerId, false);
+      this._handleLike(this._data._id, false);
     }
   }
 
