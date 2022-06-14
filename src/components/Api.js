@@ -14,20 +14,20 @@ export default class Api {
     }
   }
 
+  // Проверка ответа от сервера
+  _checkResponseStatus(res) {
+    if(res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`)
+  }
+
   getData(additive) {
     return fetch(this._url + additive, {
       method: "GET",
       headers: this._headers,
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+      .then(this._checkResponseStatus)
   }
 
   patchProfile(data, button) {
@@ -40,15 +40,7 @@ export default class Api {
         about: data.about,
       }),
     })
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-      .finally(() => {
-        this._rendering(button, false);
-      });
+      .then(this._checkResponseStatus)
   }
 
   addNewCard(data, button) {
@@ -61,27 +53,15 @@ export default class Api {
         link: data.link,
       }),
     })
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-      .finally(() => {
-        this._rendering(button, false);
-      });
+      .then(this._checkResponseStatus)
   }
   deleteCard(id) {
+    console.log(this._url + '/cards/' + id)
     return fetch(this._url + '/cards/' + id, {
       method: "DELETE",
       headers: this._headers,
     })
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      .then(this._checkResponseStatus)
   }
 
   handleCard(id, action) {
@@ -90,16 +70,12 @@ export default class Api {
     } else {
       this._method = "DELETE";
     }
+    console.log('/cards/likes/' + id)
     return fetch(this._url + '/cards/likes/' + id, {
       method: this._method,
       headers: this._headers,
     })
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      });
+      .then(this._checkResponseStatus)
   }
 
   updateAvatar(data, button) {
@@ -111,15 +87,6 @@ export default class Api {
         avatar: data.avatarlink,
       }),
     })
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-      .finally(() => {
-        this._rendering(button, false);
-      });
+      .then(this._checkResponseStatus)
   }
-
 }

@@ -1,32 +1,27 @@
 export default class Card {
-  constructor({ data, handleCardClick }, deleteClickHandler, handleLike, cardSelector) {
+  constructor({ data, handleCardClick, handleCardDelete }, handleLike, userId, cardSelector) {
     this._name = data.name;
     this._link = data.link;
-    this._likesLength = data.likes.length;
     this._data = data;
-    this.owner = this._data.owner;
-    this._deleteClickHandler = deleteClickHandler;
+    this._likesLength = data.likes.length;
+    this._id = data._id;
+    this._ownerId = data.owner._id;
+    this._userId = userId;
+    this._handleCardDelete = handleCardDelete;
     this._handleLike = handleLike;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
   }
 
-  // Метод - установка id пользователя
-  getOwnerId(id){
-    this._ownerId = id;
-  }
-
   _verifyOwner() {
-    if (this.owner) {
-      if (this.owner._id === this._ownerId) {
-        this._elementDeleteButton.classList.add('button_owner');
-      }
-      this._data.likes.forEach((item) => {
-        if (item._id === this._ownerId) {
-          this._elementLikeButton.classList.add('button_active');
-        }
-      });
+    if (this._ownerId === this._userId) {
+      this._elementDeleteButton.classList.add('button_owner');
     }
+    this._data.likes.forEach((like) => {
+      if(like._id === this._userId) {
+        this._elementLikeButton.classList.add('button_active')
+      }
+    })
   }
 
   // Метод получения шаблона карточки
@@ -36,8 +31,12 @@ export default class Card {
       .content
       .querySelector('.cards__item')
       .cloneNode(true);
-    
     return cardElement
+  }
+
+  deleteCard() {
+    this._element.remove();
+    this._element = null;
   }
 
   // Метод - создание карточки
@@ -66,7 +65,6 @@ export default class Card {
   // Метод - возможность ставить лайк
   _likeClickHandler() {
     this._elementLikeButton.classList.toggle('button_active');
-
     // Проверяем, лайкнули ли мы уже карточку
     if (this._elementLikeButton.classList.contains('button_active')) {
       // Преобразуем строку в число добавляем/отнимаем единицу
@@ -83,9 +81,7 @@ export default class Card {
     this._elementLikeButton.addEventListener('click', () => {
       this._likeClickHandler()
     });
-    this._elementDeleteButton.addEventListener('click', () => {
-      this._deleteClickHandler(this._data._id, this._element)
-    });
+    this._elementDeleteButton.addEventListener('click', this._handleCardDelete);
     this._elementImage.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link)
     });
